@@ -1,0 +1,62 @@
+{% extends "users/base.html" %}
+{% block title %}Seus Dados{% endblock title %}
+{% block content %}
+
+    <div class="row my-3 p-3">
+        <div class="col text-center">
+            <img class="rounded-circle account-img" src="{{ user.profile.avatar.url }} " style="cursor: pointer;"/>
+        </div>
+    </div>
+
+    {% if user_form.errors %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <div id="form_errors">
+                {% for key, value in user_form.errors.items %}
+                    <strong>{{ value }}</strong>
+                {% endfor %}
+            </div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+    <div class="form-content">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label class="small mb-1">Usuário:</label>
+                            {{ user_form.username }}
+                        <label class="small mb-1">Email:</label>
+                            {{ user_form.email }}
+                    </div>
+                    <div class="form-group">
+                        <a href="{% url 'password_change' %}">Mudar Senha</a>
+                        <hr>
+                        <label class="small mb-1">Alterar foto de perfil:</label>
+                        {{ profile_form.avatar }}
+                        <label class="small mb-1">Comentários:</label> {{ profile_form.bio }}
+                    </div>
+
+                    <label class="small mb-1">Adicionar cartão de vacina modelo 1:</label>
+                        {{ profile_form.vacina }}
+                    <div class="row my-3 p-3">
+                        <img class="rounded-bottom account-img" src="{{ user.profile.vacina.url }} " style="cursor: pointer;"/>
+                    </div>
+
+                    <label class="small mb-1">Adicionar cartão de vacina modelo 2:</label>
+                        {{ profile_form.vacina2 }}
+
+                </div>
+            </div>
+    <div class="row my-3 p-3">
+        <img class="rounded-bottom account-img" src="{{ user.profile.vacina2.url }} " style="cursor: pointer;"/>
+
+    </div>
+            <br><br>
+            <button type="submit" class="btn btn-dark btn-lg">Salvar Alterações</button>
+            <button type="reset" class="btn btn-dark btn-lg">Resetar</button>
+        </form>
+    </div>
+{% endblock content %}

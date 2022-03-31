@@ -1,0 +1,25 @@
+{% extends "users/base.html" %}
+{% block title %} Home Page {% endblock title%}
+{% block content %}
+    <div class="jumbotron">
+        <img src="/media/fpsicon.png" class="mx-auto d-block" width="25%">
+        <div class="col text-center">
+            <h1 class="display-4">Bem-vindo, {{user.first_name.title|default:'Visitante'}}</h1>
+        </div>
+        <p class="lead">
+            Este é um <b>Sistema de Envio de Documentos</b> acesse a pagina meus dados e realize o upload dos arquivos solicitados..
+        </p>
+        <hr class="my-4">
+        <p class="lead">
+            <div class="col text-center">
+                {% if user.is_authenticated %}
+                    <a class="btn btn-success btn-lg" href="{% url 'users-profile' %}" role="button">Meus Dados</a>
+                    <a class="btn btn-success btn-lg" href="{% url 'logout' %}" role="button">Desconectar</a>
+                {% else %}
+                    <a class="btn btn-success btn-lg" href="{% url 'login' %}" role="button">Entrar</a>
+                {% endif %}
+            </div>
+        </p>
+    </div>
+
+{% endblock content %}

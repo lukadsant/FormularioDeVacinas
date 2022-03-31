@@ -1,0 +1,4 @@
+Django
+Pillow
+python-dotenv
+social-auth-app-django
